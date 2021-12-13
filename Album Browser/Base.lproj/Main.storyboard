@@ -68,7 +68,7 @@
         <!--Navigation Controller-->
         <scene sceneID="WOU-43-9y5">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBarsOnTap="YES" hidesBarsWhenKeyboardAppears="YES" id="5GZ-fd-47Z" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBarsWhenKeyboardAppears="YES" id="5GZ-fd-47Z" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="f7w-iK-u4i">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>

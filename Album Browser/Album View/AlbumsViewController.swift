@@ -11,9 +11,10 @@ class AlbumsViewController: UIViewController {
 
 	@IBOutlet weak var albumsTableView: UITableView!
 
+	private let albumsManager = AlbumManager()
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		self.title = "Albums"
 		// Do any additional setup after loading the view.
 	}
 
