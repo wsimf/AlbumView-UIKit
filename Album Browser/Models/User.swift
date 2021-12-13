@@ -9,9 +9,6 @@ import Foundation
 
 struct User: Codable, Equatable, Hashable {
 
-	var id: String
+	var id: Int
 	var name: String
-	var userName: String
-	var email: String
-	var phone: String
 }

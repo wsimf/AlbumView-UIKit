@@ -9,8 +9,8 @@ import Foundation
 
 struct Album: Codable, Equatable, Hashable {
 
-	var userId: String
-	var id: String
+	var userId: Int
+	var id: Int
 	var title: String
 }
 

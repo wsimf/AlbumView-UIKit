@@ -26,24 +26,28 @@ class AlbumManager {
 	var users: [User] = []
 	var albumPhotos: [AlbumPhoto] = []
 
-	func refreshAlbums(forceRefresh: Bool = false) async throws {
+	func refreshAlbumsIfNecessary(forceRefresh: Bool = false) async throws {
 		guard forceRefresh || albums.isEmpty else { return }
 
 		albums = try await getData(endpoint: .albums, forceRefresh: forceRefresh)
 	}
 
-	func refreshUsers(forceRefresh: Bool = false) async throws {
+	func refreshUsersIfNecessary(forceRefresh: Bool = false) async throws {
 		guard forceRefresh || users.isEmpty else { return }
 
 		users = try await getData(endpoint: .users, forceRefresh: forceRefresh)
 	}
 
-	func refreshAlbumPhotos(forceRefresh: Bool = false) async throws {
+	func refreshAlbumPhotosIfNecessary(forceRefresh: Bool = false) async throws {
 		guard forceRefresh || albumPhotos.isEmpty else { return }
 
 		albumPhotos = try await getData(endpoint: .photos, forceRefresh: forceRefresh)
 	}
-	
+
+	func getUser(for album: Album) -> User? {
+		return users.first(where: { $0.id == album.userId })
+	}
+
 	private func getData<T>(endpoint: ApiEndpoint, forceRefresh: Bool = false) async throws -> T where T: Codable {
 		if !forceRefresh && canServeFromCache(endpoint: endpoint), let cached: T = getCacheData(endpoint: endpoint) {
 			return cached
@@ -121,7 +125,7 @@ fileprivate extension AlbumManager {
 		guard let cachedDate = getCachedDate(endpoint: endpoint) else { return false }
 		guard let fiveDaysAgo = Calendar.current.date(byAdding: .day, value: -5, to: Date()) else { return false }
 
-		return cachedDate < fiveDaysAgo
+		return cachedDate > fiveDaysAgo
 	}
 
 	private func getCachedDate(endpoint: ApiEndpoint) -> Date? {
