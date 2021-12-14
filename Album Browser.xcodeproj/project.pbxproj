@@ -19,6 +19,8 @@
 		8D3D32B827640AC9003F084E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D3D32B627640AC9003F084E /* Main.storyboard */; };
 		8D3D32BA27640ACA003F084E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D3D32B927640ACA003F084E /* Assets.xcassets */; };
 		8D3D32BD27640ACA003F084E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D3D32BB27640ACA003F084E /* LaunchScreen.storyboard */; };
+		8D7378902768494000EB4900 /* AlbumsPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73788F2768494000EB4900 /* AlbumsPhotoViewController.swift */; };
+		8DA161A227683DED00C4F432 /* CachedImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA161A127683DED00C4F432 /* CachedImageManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		8D3D32B927640ACA003F084E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D3D32BC27640ACA003F084E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D3D32BE27640ACA003F084E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D73788F2768494000EB4900 /* AlbumsPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsPhotoViewController.swift; sourceTree = "<group>"; };
+		8DA161A127683DED00C4F432 /* CachedImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +92,7 @@
 			children = (
 				8D072C0E2766C3DB0046A444 /* Extensions */,
 				8D072C092766BCB20046A444 /* AlbumManager.swift */,
+				8DA161A127683DED00C4F432 /* CachedImageManager.swift */,
 				8D072C022766BB1A0046A444 /* Models */,
 				8D3D32C427640EC8003F084E /* View Controllers */,
 				8D3D32B027640AC9003F084E /* AppDelegate.swift */,
@@ -105,6 +110,7 @@
 			children = (
 				8D3D32B427640AC9003F084E /* AlbumsViewController.swift */,
 				8D072C11276704C90046A444 /* AlbumsThumbnailViewController.swift */,
+				8D73788F2768494000EB4900 /* AlbumsPhotoViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -185,8 +191,10 @@
 				8D3D32B127640AC9003F084E /* AppDelegate.swift in Sources */,
 				8D3D32B327640AC9003F084E /* SceneDelegate.swift in Sources */,
 				8D072C0A2766BCB20046A444 /* AlbumManager.swift in Sources */,
+				8D7378902768494000EB4900 /* AlbumsPhotoViewController.swift in Sources */,
 				8D072C062766BB720046A444 /* User.swift in Sources */,
 				8D072C12276704C90046A444 /* AlbumsThumbnailViewController.swift in Sources */,
+				8DA161A227683DED00C4F432 /* CachedImageManager.swift in Sources */,
 				8D072C042766BB5A0046A444 /* Album.swift in Sources */,
 				8D072C102766C3F10046A444 /* Codable+AlbumBrowser.swift in Sources */,
 			);

@@ -52,6 +52,10 @@ class AlbumManager {
 		return self.albums.first(where: { $0.id == id })
 	}
 
+	func findAlbumPhoto(with id: Int) -> AlbumPhoto? {
+		return self.albumPhotos.first(where: { $0.id == id })
+	}
+	
 	func findAlbumPhotos(for album: Album) -> [AlbumPhoto] {
 		return self.albumPhotos.filter({ $0.albumId == album.id })
 	}
