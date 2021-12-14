@@ -1,5 +1,7 @@
 ## Album Details Viewer
+
 This project demonstrates the use of following UIKit components
+
 - `UITableView`
 - `UICollectionView`
 - `UIScrollView`
