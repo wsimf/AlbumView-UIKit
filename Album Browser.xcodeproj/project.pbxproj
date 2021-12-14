@@ -104,6 +104,8 @@
 			);
 			path = "Album Browser";
 			sourceTree = "<group>";
+			tabWidth = 4;
+			usesTabs = 1;
 		};
 		8D3D32C427640EC8003F084E /* View Controllers */ = {
 			isa = PBXGroup;

@@ -70,8 +70,8 @@ class AlbumsViewController: UIViewController {
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "AlbumDetailsSegue",
-			let detailsVc = segue.destination as? AlbumsThumbnailsViewController,
-			let originatingCell = sender as? UITableViewCell {
+		   let detailsVc = segue.destination as? AlbumsThumbnailsViewController,
+		   let originatingCell = sender as? UITableViewCell {
 
 			detailsVc.albumsManager = self.albumsManager
 			detailsVc.selectedAlbum = self.albumsManager.findAlbum(with: originatingCell.tag)
