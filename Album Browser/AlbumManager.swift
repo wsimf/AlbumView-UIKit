@@ -27,34 +27,42 @@ class AlbumManager {
 	var albumPhotos: [AlbumPhoto] = []
 
 	func refreshAlbumsIfNecessary(forceRefresh: Bool = false) async throws {
-		guard forceRefresh || albums.isEmpty else { return }
+		guard forceRefresh || self.albums.isEmpty else { return }
 
-		albums = try await getData(endpoint: .albums, forceRefresh: forceRefresh)
+		self.albums = try await self.getData(endpoint: .albums, forceRefresh: forceRefresh)
 	}
 
 	func refreshUsersIfNecessary(forceRefresh: Bool = false) async throws {
-		guard forceRefresh || users.isEmpty else { return }
+		guard forceRefresh || self.users.isEmpty else { return }
 
-		users = try await getData(endpoint: .users, forceRefresh: forceRefresh)
+		self.users = try await self.getData(endpoint: .users, forceRefresh: forceRefresh)
 	}
 
 	func refreshAlbumPhotosIfNecessary(forceRefresh: Bool = false) async throws {
-		guard forceRefresh || albumPhotos.isEmpty else { return }
+		guard forceRefresh || self.albumPhotos.isEmpty else { return }
 
-		albumPhotos = try await getData(endpoint: .photos, forceRefresh: forceRefresh)
+		self.albumPhotos = try await self.getData(endpoint: .photos, forceRefresh: forceRefresh)
 	}
 
 	func getUser(for album: Album) -> User? {
-		return users.first(where: { $0.id == album.userId })
+		return self.users.first(where: { $0.id == album.userId })
+	}
+
+	func findAlbum(with id: Int) -> Album? {
+		return self.albums.first(where: { $0.id == id })
+	}
+
+	func findAlbumPhotos(for album: Album) -> [AlbumPhoto] {
+		return self.albumPhotos.filter({ $0.albumId == album.id })
 	}
 
 	private func getData<T>(endpoint: ApiEndpoint, forceRefresh: Bool = false) async throws -> T where T: Codable {
-		if !forceRefresh && canServeFromCache(endpoint: endpoint), let cached: T = getCacheData(endpoint: endpoint) {
+		if !forceRefresh && self.canServeFromCache(endpoint: endpoint), let cached: T = self.getCacheData(endpoint: endpoint) {
 			return cached
 		}
 
-		let result: T = try await downloadData(endpoint: endpoint)
-		setCacheData(endpoint: endpoint, data: result)
+		let result: T = try await self.downloadData(endpoint: endpoint)
+		self.setCacheData(endpoint: endpoint, data: result)
 
 		return result
 	}
@@ -64,7 +72,7 @@ class AlbumManager {
 fileprivate extension AlbumManager {
 
 	func downloadData<T>(endpoint: ApiEndpoint) async throws -> T where T: Decodable {
-		let request = try getUrlRequest(endpoint: endpoint)
+		let request = try self.getUrlRequest(endpoint: endpoint)
 		let (data, response) = try await URLSession.shared.data(for: request)
 
 		guard (response as? HTTPURLResponse)?.statusCode == 200 else {
@@ -91,7 +99,7 @@ fileprivate extension AlbumManager {
 fileprivate extension AlbumManager {
 
 	func setCacheData<T>(endpoint: ApiEndpoint, data: T) where T: Encodable {
-		guard let cachePath = getCachePathUrl(endpoint: endpoint) else {
+		guard let cachePath = self.getCachePathUrl(endpoint: endpoint) else {
 			print("Unable to determine Cache Path - Caching data cancelled")
 			return
 		}
@@ -107,7 +115,7 @@ fileprivate extension AlbumManager {
 	}
 
 	func getCacheData<T>(endpoint: ApiEndpoint) -> T? where T: Decodable {
-		guard let cachePath = getCachePathUrl(endpoint: endpoint) else {
+		guard let cachePath = self.getCachePathUrl(endpoint: endpoint) else {
 			print("Unable to determine Cache Path - Caching data cancelled")
 			return nil
 		}
@@ -121,8 +129,9 @@ fileprivate extension AlbumManager {
 		}
 	}
 
+	/// Returns true if the cached data is not expired (currently every 5 days)
 	func canServeFromCache(endpoint: ApiEndpoint) -> Bool {
-		guard let cachedDate = getCachedDate(endpoint: endpoint) else { return false }
+		guard let cachedDate = self.getCachedDate(endpoint: endpoint) else { return false }
 		guard let fiveDaysAgo = Calendar.current.date(byAdding: .day, value: -5, to: Date()) else { return false }
 
 		return cachedDate > fiveDaysAgo
