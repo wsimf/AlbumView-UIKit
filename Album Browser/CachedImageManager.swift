@@ -10,6 +10,8 @@ import UIKit
 
 class CachedImageManager {
 
+	private let cache = NSCache<NSString, NSData>()
+
 	enum CachedImageManagerError: Error {
 		case invalidUrl
 		case serverError(status: Int)
@@ -21,6 +23,10 @@ class CachedImageManager {
 			throw CachedImageManagerError.invalidUrl
 		}
 
+		if let data = self.cache.object(forKey: url.path as NSString), let image = UIImage(data: data as Data) {
+			return image
+		}
+
 		var request = URLRequest(url: url)
 		request.httpMethod = "GET"
 
@@ -28,6 +34,8 @@ class CachedImageManager {
 		guard (response as? HTTPURLResponse)?.statusCode == 200 else {
 			throw CachedImageManagerError.serverError(status: (response as? HTTPURLResponse)?.statusCode ?? 400)
 		}
+
+		self.cache.setObject(data as NSData, forKey: url.path as NSString, cost: data.count)
 
 		guard let image = UIImage(data: data) else {
 			throw CachedImageManagerError.badImageData
