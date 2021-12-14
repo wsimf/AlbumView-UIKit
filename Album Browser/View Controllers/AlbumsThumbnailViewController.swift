@@ -42,17 +42,19 @@ class AlbumsThumbnailsViewController: UIViewController {
     }
 
     private func refreshData(forceRefresh: Bool = false) {
-        if let albumsManager = self.albumsManager {
-            Task {
-                do {
-                    try await albumsManager.refreshAlbumPhotosIfNecessary(forceRefresh: forceRefresh)
-                } catch {
-                    self.showDataAccessError(error: error)
-                }
+        guard let albumsManager = self.albumsManager else {
+            return
+        }
 
-                if let album = self.selectedAlbum {
-                    self.albumPhotos = albumsManager.findAlbumPhotos(for: album)
-                }
+        Task {
+            do {
+                try await albumsManager.refreshAlbumPhotosIfNecessary(forceRefresh: forceRefresh)
+            } catch {
+                self.showDataAccessError(error: error)
+            }
+
+            if let album = self.selectedAlbum {
+                self.albumPhotos = albumsManager.findAlbumPhotos(for: album)
             }
         }
     }

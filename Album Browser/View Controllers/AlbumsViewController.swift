@@ -43,6 +43,8 @@ class AlbumsViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
         if let selectedRows = self.albumsTableView.indexPathsForSelectedRows {
             // Clear the table view selection when user comes back
             selectedRows.forEach({ self.albumsTableView.deselectRow(at: $0, animated: false) })
