@@ -10,7 +10,6 @@ import UIKit
 class AlbumsViewController: UIViewController {
 
 	@IBOutlet weak var albumsTableView: UITableView!
-	@IBOutlet weak var loadingView: UIActivityIndicatorView!
 
 	private let refreshControl: UIRefreshControl = {
 		let control = UIRefreshControl()
@@ -56,7 +55,7 @@ class AlbumsViewController: UIViewController {
 				try await self.albumsManager.refreshAlbumsIfNecessary(forceRefresh: forceRefresh)
 				try await self.albumsManager.refreshUsersIfNecessary(forceRefresh: forceRefresh)
 			} catch {
-
+				self.showDataAccessError(error: error)
 			}
 
 			guard !self.albumsManager.albums.isEmpty && !self.albumsManager.users.isEmpty else { return }
@@ -77,6 +76,19 @@ class AlbumsViewController: UIViewController {
 			detailsVc.albumsManager = self.albumsManager
 			detailsVc.selectedAlbum = self.albumsManager.findAlbum(with: originatingCell.tag)
 		}
+	}
+
+	func showDataAccessError(error: Error) {
+		let alert = UIAlertController(title: "Unable to access album details",
+									  message: "Album details are not available. Error: \(error.localizedDescription). Please try again",
+									  preferredStyle: .alert)
+
+		alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { [weak self] (_) in
+			alert.dismiss(animated: true, completion: nil)
+			self?.refreshData(forceRefresh: true)
+		}))
+
+		self.present(alert, animated: true, completion: nil)
 	}
 }
 

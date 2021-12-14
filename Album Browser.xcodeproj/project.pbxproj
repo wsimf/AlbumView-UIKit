@@ -91,10 +91,10 @@
 			isa = PBXGroup;
 			children = (
 				8D072C0E2766C3DB0046A444 /* Extensions */,
-				8D072C092766BCB20046A444 /* AlbumManager.swift */,
-				8DA161A127683DED00C4F432 /* CachedImageManager.swift */,
 				8D072C022766BB1A0046A444 /* Models */,
 				8D3D32C427640EC8003F084E /* View Controllers */,
+				8D072C092766BCB20046A444 /* AlbumManager.swift */,
+				8DA161A127683DED00C4F432 /* CachedImageManager.swift */,
 				8D3D32B027640AC9003F084E /* AppDelegate.swift */,
 				8D3D32B227640AC9003F084E /* SceneDelegate.swift */,
 				8D3D32B627640AC9003F084E /* Main.storyboard */,
