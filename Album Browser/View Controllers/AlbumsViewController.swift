@@ -21,7 +21,7 @@ class AlbumsViewController: UIViewController {
 
 	private let defaultCellConfiguration: UIListContentConfiguration = {
 		var config = UIListContentConfiguration.subtitleCell()
-		config.textProperties.font = .preferredFont(forTextStyle: .caption1)
+		config.textProperties.font = .preferredFont(forTextStyle: .body)
 		config.secondaryTextProperties.font = .preferredFont(forTextStyle: .caption2)
 		config.secondaryTextProperties.color = .gray
 
@@ -40,8 +40,14 @@ class AlbumsViewController: UIViewController {
 		super.viewDidLayoutSubviews()
 
 		self.albumsTableView.dataSource = self
-		self.albumsTableView.delegate = self
 		self.albumsTableView.refreshControl = self.refreshControl
+	}
+
+	override func viewWillAppear(_ animated: Bool) {
+		if let selectedRows = self.albumsTableView.indexPathsForSelectedRows {
+			// Clear the table view selection when user comes back
+			selectedRows.forEach({ self.albumsTableView.deselectRow(at: $0, animated: false) })
+		}
 	}
 
 	private func refreshData(forceRefresh: Bool = false) {
@@ -96,12 +102,5 @@ extension AlbumsViewController: UITableViewDataSource {
 		cell.tag = album.id
 
 		return cell
-	}
-}
-
-extension AlbumsViewController: UITableViewDelegate {
-
-	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
 	}
 }

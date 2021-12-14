@@ -92,8 +92,6 @@ extension AlbumsThumbnailsViewController: UICollectionViewDataSource {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ThumbnailViewCell", for: indexPath) as! ThumbnailViewCell
 		let photo = self.albumPhotos[indexPath.row]
 
-		cell.setErrorImage()
-
 		Task {
 			do {
 				let image = try await self.cachedImageManager.fetchImage(photo.thumbnailUrl)
