@@ -11,3 +11,9 @@ The views and scenes are contained in the `MainStorey` board file. Segues are us
 An `AlbumManager` and `CachedImageManager`  takes care of managing the album data and the image data respectively. Both album and image data are download only when necessary.
 
 The project was built on Xcode 13.2 and Swift 5.5 and targets iOS 15. Swift’s `async/await` concurrent features are also used. 
+
+### Screenshots
+
+![Screen_01](https://user-images.githubusercontent.com/1941924/145964753-382e33d7-d22e-49b5-a646-7f77b848ca19.jpg)
+![Screen_02](https://user-images.githubusercontent.com/1941924/145964912-c3390a15-4b6f-4cc4-b4b2-18cb23922285.jpg)
+![Screen_03](https://user-images.githubusercontent.com/1941924/145964927-ccbf7f6f-884d-4cc2-9e05-33e3eb330ecf.jpg)
